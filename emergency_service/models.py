@@ -29,7 +29,7 @@ class Applicant(models.Model):
                               choices=GENDER_CHOICES,
                               default=WOMAN)
     date = models.DateField("Дата рождения")
-    health_status = models.TextField("Состояние здоровья", blank=True)
+    health_status = models.TextField("Состояние здоровья", blank=True, default='Практически здоров')
     number = models.CharField("Номер телефона", max_length=100, blank=True)
 
     class Meta:
