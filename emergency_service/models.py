@@ -1,4 +1,6 @@
+import uuid
 from django.db import models
+
 
 
 class EmergencyService(models.Model):
@@ -41,7 +43,8 @@ class Applicant(models.Model):
 
 class Appeal(models.Model):
     date = models.DateField("Дата обращения")
-    number = models.IntegerField("Номер обращения")
+    number = models.UUIDField("Номер обращения", primary_key=True,
+                                     default=uuid.uuid4, editable=True)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
                                      verbose_name='Экстренная служба')
     applicant = models.ForeignKey(Applicant, related_name='appeals',
@@ -49,6 +52,9 @@ class Appeal(models.Model):
                                   on_delete=models.CASCADE)
 
     class Meta:
+        indexes = [
+            models.Index(fields=['number'], name='appeal_number_idx'),
+        ]
         verbose_name = 'Обращение'
         verbose_name_plural = 'Обращения'
         ordering = ['date', 'number']
