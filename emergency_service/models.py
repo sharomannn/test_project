@@ -2,7 +2,6 @@ import uuid
 from django.db import models
 
 
-
 class EmergencyService(models.Model):
     name = models.CharField("Название службы", max_length=100)
     code = models.CharField("Код службы", max_length=100)
@@ -29,7 +28,9 @@ class Applicant(models.Model):
                               choices=GENDER_CHOICES,
                               default=WOMAN)
     date = models.DateField("Дата рождения")
-    health_status = models.TextField("Состояние здоровья", blank=True, default='Практически здоров')
+    health_status = models.TextField("Состояние здоровья", blank=True,
+                                     default='Практически здоров',
+                                     help_text="Аллергоамамнез, хронические заболевания и т.п.")
     number = models.CharField("Номер телефона", max_length=100, blank=True)
 
     class Meta:
@@ -44,7 +45,7 @@ class Applicant(models.Model):
 class Appeal(models.Model):
     date = models.DateField("Дата обращения")
     number = models.UUIDField("Номер обращения", primary_key=True,
-                                     default=uuid.uuid4, editable=True)
+                              default=uuid.uuid4, editable=True)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
                                      verbose_name='Экстренная служба')
     applicant = models.ForeignKey(Applicant, related_name='appeals',
