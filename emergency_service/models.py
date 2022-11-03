@@ -22,8 +22,10 @@ class Applicant(models.Model):
     GENDER_CHOICES = [
         (MAN, 'Мужчина'),
         (WOMAN, 'Женщина'), ]
-    photo_applicant = models.ImageField(blank=True)
-    name = models.CharField("ФИО заявителя", max_length=100)
+    photo_applicant = models.ImageField("Фото заявителя", blank=True)
+    surname = models.CharField("Фамилия", max_length=100)
+    name = models.CharField("Имя", max_length=100)
+    name_father = models.CharField("Отчество", max_length=100)
     gender = models.CharField("Пол", max_length=2,
                               choices=GENDER_CHOICES,
                               default=WOMAN)
@@ -54,12 +56,13 @@ class Appeal(models.Model):
     date = models.DateField("Дата обращения", auto_now_add=True )
     number = models.UUIDField('Номер обращения', default=uuid.uuid4, editable=True)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
-                                     verbose_name='Экстренная служба')
+                                     verbose_name='Экстренная служба',)
     applicant = models.ForeignKey(Applicant, related_name='appeals',
                                   verbose_name='Заявитель',
                                   on_delete=models.CASCADE)
     number_cases = models.IntegerField('Количество пострадавших', default=1)
     not_call = models.BooleanField('Не звонить', default=False)
+
 
     class Meta:
         indexes = [
