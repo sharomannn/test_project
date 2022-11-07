@@ -1,21 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Номер карточки</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col">Количество пострадавших</th>
+        <th scope="col">Не звонить</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Экстренная служба</th>
+        <th scope="col">Заявитель</th>
+    </tr>
+    </thead>
     {% for post in appeal_list %}
-    <div class="card gy-5">
-        <h5 class="card-header">Номер карточки: {{post.number}}</h5>
-        <div class="card-body">
-            <p class="card-title">Имя заявителя: {{post.applicant}}</p>
-            <p class="card-text">Статус: {{post.status_appeal}}</p>
-            <p class="card-text">Дата обращения: {{post.date}}</p>
-            <p class="card-text">Экстренные службы:
-                {% for service in post.service %}
-                    {{ service.name }}
-                {% endfor %}
-            </p>
-            <p class="card-text">Количество пострадавших:
-                {{post.number_cases}}</p>
-        </div>
-    </div>
+    <tbody>
+    <tr>
+        <th scope="row">{{post.id}}</th>
+        <td>{{post.number}}</td>
+        <td>{{post.date}}</td>
+        <td>{{post.number_cases}}</td>
+        <td>{% if post.not_call == True %}
+            Не звонить
+            {% else %}
+            Можно звонить
+            {% endif %}
+        </td>
+        <!--        <td>{{post.not_call}}</td>-->
+        <td>{{post.status_appeal}}</td>
+        <td>{% for service in post.service.all %}
+            {{ service.name }};
+            {% endfor %}
+        </td>
+        <td>{{post.applicant}}</td>
+
+
+    </tr>
+    </tbody>
     {% endfor %}
+</table>
+
+
+{% for post in appeal_list %}
+<div class="card gy-5">
+    <h5 class="card-header">Номер карточки: {{post.number}}</h5>
+    <div class="card-body">
+        <p class="card-title">Имя заявителя: {{post.applicant}}</p>
+        <p class="card-text">Статус: {{post.status_appeal}}</p>
+        <p class="card-text">Дата обращения: {{post.date}}</p>
+        <p class="card-text">Экстренные службы:
+            {% for service in post.service.all %}
+            {{ service.name }};
+            {% endfor %}
+        </p>
+        <p class="card-text">Количество пострадавших:
+            {{post.number_cases}}</p>
+    </div>
+</div>
+{% endfor %}
 {% endblock content %}
