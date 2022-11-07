@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in service_list %}
+<div class="card gy-5">
+        <h5 class="card-header">Служба: {{post.name}}</h5>
+        <div class="card-body">
+            <p class="card-title">Код: {{post.code}}</p>
+            <p class="card-text">Номер: {{post.number}}</p>
+        </div>
+    </div>
+
+{% endfor %}
+{% endblock content %}

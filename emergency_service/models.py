@@ -40,17 +40,18 @@ class Applicant(models.Model):
         verbose_name_plural = 'Заявители'
         ordering = ['name']
 
+
     def __str__(self):
         return self.surname + ' ' + self.name + ' ' + self.name_father
 
 
 class Appeal(models.Model):
-    IN_WORK = 'WR'
-    FINNISHED = 'FN'
+    IN_WORK = 'В работе'
+    FINNISHED = 'Завершено'
     STATUS_CHOICES = [
         (IN_WORK, 'В работе'),
         (FINNISHED, 'Завершено'), ]
-    status_appeal = models.CharField("Статус обращения", max_length=2,
+    status_appeal = models.CharField("Статус обращения", max_length=10,
                                      choices=STATUS_CHOICES,
                                      default=IN_WORK)
     date = models.DateField("Дата обращения", auto_now_add=True)
@@ -70,4 +71,5 @@ class Appeal(models.Model):
         ]
         verbose_name = 'Обращение'
         verbose_name_plural = 'Обращения'
-        ordering = ['date', 'number']
+        ordering = ['-date']
+

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in applicant_list %}
+<div class="card gy-5">
+        <h5 class="card-header">ФИО заявителя: {{post.surname}} {{post.name}} {{post.name_father}}</h5>
+        <div class="card-body">
+            <p class="card-title">Пол заявителя: {{post.gender}}</p>
+            <p class="card-text">Дата рождения: {{post.date}}</p>
+            <p class="card-text">Номер телефона: {{post.number}}</p>
+        </div>
+    </div>
+
+
+
+{% endfor %}
+{% endblock content %}

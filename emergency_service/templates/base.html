@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Test project</title>
+</head>
+<body>
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="http://127.0.0.1:8000/">Служба спасения</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarText" aria-controls="navbarText"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="http://127.0.0.1:8000/service">Данные о службах</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/applicant">Заявители</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/appeal">Обращения</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+        Navbar text with an inline element
+      </span>
+        </div>
+    </div>
+</nav>
+{% block content %}
+{% endblock content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+
+</div>
+</body>
+</html>

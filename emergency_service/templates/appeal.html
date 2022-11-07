@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% for post in appeal_list %}
+    <div class="card gy-5">
+        <h5 class="card-header">Номер карточки: {{post.number}}</h5>
+        <div class="card-body">
+            <p class="card-title">Имя заявителя: {{post.applicant}}</p>
+            <p class="card-text">Статус: {{post.status_appeal}}</p>
+            <p class="card-text">Дата обращения: {{post.date}}</p>
+            <p class="card-text">Экстренные службы:
+                {% for service in post.service %}
+                    {{ service.name }}
+                {% endfor %}
+            </p>
+            <p class="card-text">Количество пострадавших:
+                {{post.number_cases}}</p>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock content %}
