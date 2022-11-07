@@ -41,7 +41,7 @@ class Applicant(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return self.name
+        return self.surname + ' ' + self.name + ' ' + self.name_father
 
 
 class Appeal(models.Model):
@@ -51,18 +51,18 @@ class Appeal(models.Model):
         (IN_WORK, 'В работе'),
         (FINNISHED, 'Завершено'), ]
     status_appeal = models.CharField("Статус обращения", max_length=2,
-                              choices=STATUS_CHOICES,
-                              default=IN_WORK)
-    date = models.DateField("Дата обращения", auto_now_add=True )
-    number = models.UUIDField('Номер обращения', default=uuid.uuid4, editable=True)
+                                     choices=STATUS_CHOICES,
+                                     default=IN_WORK)
+    date = models.DateField("Дата обращения", auto_now_add=True)
+    number = models.UUIDField('Номер обращения', default=uuid.uuid4,
+                              editable=False)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
-                                     verbose_name='Экстренная служба',)
+                                     verbose_name='Экстренная служба', )
     applicant = models.ForeignKey(Applicant, related_name='appeals',
                                   verbose_name='Заявитель',
                                   on_delete=models.CASCADE)
     number_cases = models.IntegerField('Количество пострадавших', default=1)
     not_call = models.BooleanField('Не звонить', default=False)
-
 
     class Meta:
         indexes = [

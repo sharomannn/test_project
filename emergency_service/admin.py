@@ -2,6 +2,7 @@ from django.contrib import admin
 from emergency_service import models
 
 
+
 @admin.register(models.EmergencyService)
 class EmergencyService(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -14,4 +15,5 @@ class Applicant(admin.ModelAdmin):
 
 @admin.register(models.Appeal)
 class Appeal(admin.ModelAdmin):
+    list_filter = ('date', 'status_appeal')
     list_display = ('date', 'number')
