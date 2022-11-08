@@ -1,28 +1,21 @@
 from django.http import HttpResponse
 from emergency_service import models
 from django.shortcuts import render
-import datetime
+from django.views.generic import ListView
+from emergency_service.models import EmergencyService, Applicant, Appeal
 
 
-def len_appeal(request):
-    len_appeal = models.Appeal.objects.count()
-    return HttpResponse(len_appeal)
+class EmergencyServicePage(ListView):
+    model = EmergencyService
+    template_name = 'emergency_service.html'
+    context_object_name = 'service_list'
 
 
-def emergency_service_page(request):
-    service = models.EmergencyService.objects.all()
-    context = {
-        'service_list': service
-    }
-    return render(request, 'emergency_service.html', context)
+class ApplicantPage(ListView):
+    model = Applicant
+    template_name = 'applicant.html'
+    context_object_name = 'applicant_list'
 
-
-def applicant_page(request):
-    applicant = models.Applicant.objects.all()
-    context = {
-        'applicant_list': applicant
-    }
-    return render(request, 'applicant.html', context)
 
 def applicant_one_page(request, applicant_id):
     context = {
@@ -31,11 +24,14 @@ def applicant_one_page(request, applicant_id):
     return render(request, "applicant_one.html", context)
 
 
+class AppealPage(ListView):
+    model = Appeal
+    template_name = 'appeal.html'
+    context_object_name = 'appeal_list'
+
 def appeal_page(request):
     appeal = models.Appeal.objects.all()
-    now = datetime.datetime.now()
     context = {
-        'now': now,
         'appeal_list': appeal
     }
     return render(request, 'appeal.html', context)
