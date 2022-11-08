@@ -58,7 +58,7 @@ class Appeal(models.Model):
     number = models.UUIDField('Номер обращения', default=uuid.uuid4,
                               editable=False)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
-                                     verbose_name='Экстренная служба', )
+                                     verbose_name='Экстренная служба', null=True, blank=True)
     applicant = models.ForeignKey(Applicant, related_name='appeals',
                                   verbose_name='Заявитель',
                                   on_delete=models.CASCADE)

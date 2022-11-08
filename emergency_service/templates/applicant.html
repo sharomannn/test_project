@@ -2,7 +2,7 @@
 {% block content %}
 {% for post in applicant_list %}
 <div class="card gy-5">
-        <h5 class="card-header">ФИО заявителя: {{post.surname}} {{post.name}} {{post.name_father}}</h5>
+        <h5 class="card-header"><a href="http://127.0.0.1:8000/applicant/{{post.id}}">ФИО заявителя: {{post.surname}} {{post.name}} {{post.name_father}}</a></h5>
         <div class="card-body">
             <p class="card-title">Пол заявителя: {{post.gender}}</p>
             <p class="card-text">Дата рождения: {{post.date}}</p>

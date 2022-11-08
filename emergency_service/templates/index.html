@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container ">
+    <div class="row gy-8">
+        <a href="http://127.0.0.1:8000/service"
+           class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+           data-bs-toggle="button">Просмотреть данные о
+            службах спасения</a>
+        <a href="http://127.0.0.1:8000/applicant" class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+           data-bs-toggle="button">Просмотреть данные о
+                заявителях</a>
+        <a href="http://127.0.0.1:8000/appeal" class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+           data-bs-toggle="button">Просмотреть обращения</a>
+    </div>
+
+    {% endblock content %}

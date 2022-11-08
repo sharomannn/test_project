@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card gy-5">
+    <h5 class="card-header">Обращение: {{ appeal.number }}</h5>
+    <div class="card-body">
+        <p class="card-title">Имя заявителя: {{appeal.applicant}}</p>
+        <p class="card-text">Статус: {{appeal.status_appeal}}</p>
+        <p class="card-text">Дата обращения: {{appeal.date}}</p>
+        <p class="card-text">Экстренные службы:
+            {% for service in appeal.service.all %}
+            {{ service.name }};
+            {% endfor %}
+        </p>
+        <p class="card-text">Количество пострадавших:
+            {{appeal.number_cases}}</p>
+        <p>Можно звонить: {% if post.not_call == True %}
+            Не звонить
+            {% else %}
+            Можно
+            {% endif %}</p>
+    </div>
+</div>
+
+{% endblock content %}

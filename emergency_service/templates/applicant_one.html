@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card gy-5">
+    <img src="https://lapkins.ru/upload/iblock/2ba/2ba727577729810222fac27e266e04ef.jpg" class="rounded mx-auto d-block" alt="...">
+        <h5 class="card-header">ФИО заявителя: {{applicant.surname}} {{applicant.name}} {{applicant.name_father}}</h5>
+        <div class="card-body">
+            <p class="card-title">Пол заявителя: {{applicant.gender}}</p>
+            <p class="card-text">Дата рождения: {{applicant.date}}</p>
+            <p class="card-text">Номер телефона: {{applicant.number}}</p>
+            <p class="card-text">Состояние здоровья: {{applicant.health_status}}</p>
+        </div>
+    </div>
+
+{% endblock content %}
