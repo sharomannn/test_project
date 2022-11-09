@@ -1,5 +1,7 @@
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from emergency_service.models import *
+from emergency_service.forms import *
 
 
 class EmergencyServicePage(ListView):
@@ -12,6 +14,7 @@ class ApplicantPage(ListView):
     model = Applicant
     template_name = 'applicant.html'
     context_object_name = 'applicant_list'
+
 
 class ApplicantOnePage(DetailView):
     model = Applicant
@@ -30,11 +33,10 @@ class AppealPage(ListView):
     template_name = 'appeal.html'
     context_object_name = 'appeal_list'
 
+
 class AppealOnePage(DetailView):
     model = Appeal
     template_name = 'appeal_one.html'
-
-
 
 
 # def appeal_page(request):
@@ -55,4 +57,37 @@ class AppealOnePage(DetailView):
 # def index_page(request):
 #     return render(request, 'index.html')
 
+def add_service(request):
+    form = AddService()
+    if request.method == 'POST':
+        form = AddService(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'add.html', context)
+
+
+def add_appeal(request):
+    form = AddAppeal()
+    if request.method == 'POST':
+        form = AddAppeal(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'add.html', context)
+
+def add_applicant(request):
+    form = AddApplicant()
+    if request.method == 'POST':
+        form = AddApplicant(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'add.html', context)
 

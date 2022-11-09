@@ -6,7 +6,7 @@ from django.utils.text import slugify
 class EmergencyService(models.Model):
     name = models.CharField("Название службы", max_length=100)
     code = models.CharField("Код службы", max_length=100)
-    code = models.CharField("Номер телефона", max_length=100)
+    number = models.CharField("Номер телефона", max_length=100)
 
     class Meta:
         verbose_name = 'Экстренная служба'
