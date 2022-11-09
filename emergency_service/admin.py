@@ -2,6 +2,9 @@ from django.contrib import admin
 from emergency_service import models
 
 
+
+
+
 @admin.register(models.EmergencyService)
 class EmergencyService(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -11,6 +14,9 @@ class EmergencyService(admin.ModelAdmin):
 class Applicant(admin.ModelAdmin):
     search_fields = ('surname', 'name', 'name_father', 'date')
     list_display = ('surname', 'name', 'name_father', 'number', 'date')
+    prepopulated_fields = {"slug": ('surname', 'name','name_father','number',)}
+
+
 
 
 @admin.register(models.Appeal)

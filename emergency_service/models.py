@@ -1,11 +1,12 @@
 import uuid
 from django.db import models
+from django.utils.text import slugify
 
 
 class EmergencyService(models.Model):
     name = models.CharField("Название службы", max_length=100)
     code = models.CharField("Код службы", max_length=100)
-    number = models.CharField("Номер телефона", max_length=100)
+    code = models.CharField("Номер телефона", max_length=100)
 
     class Meta:
         verbose_name = 'Экстренная служба'
@@ -34,6 +35,10 @@ class Applicant(models.Model):
                                      default='Практически здоров',
                                      help_text="Аллергоамамнез, хронические заболевания и т.п.")
     number = models.CharField("Номер телефона", max_length=100, blank=True)
+    slug = models.SlugField(unique=True)
+
+
+
 
     class Meta:
         verbose_name = 'Заявитель'
@@ -58,12 +63,18 @@ class Appeal(models.Model):
     number = models.UUIDField('Номер обращения', default=uuid.uuid4,
                               editable=False)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
-                                     verbose_name='Экстренная служба', null=True, blank=True)
+                                     verbose_name='Экстренная служба', blank=True)
     applicant = models.ForeignKey(Applicant, related_name='appeals',
                                   verbose_name='Заявитель',
                                   on_delete=models.CASCADE)
     number_cases = models.IntegerField('Количество пострадавших', default=1)
     not_call = models.BooleanField('Не звонить', default=False)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.number)
+        super(Appeal, self).save(*args, **kwargs)
+
 
     class Meta:
         indexes = [
