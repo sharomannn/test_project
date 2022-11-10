@@ -4,9 +4,9 @@ from django.utils.text import slugify
 
 
 class EmergencyService(models.Model):
-    name = models.CharField("Название службы", max_length=255)
-    code = models.CharField("Код службы", max_length=255)
-    number = models.CharField("Номер телефона", max_length=255)
+    name = models.CharField('Название службы', max_length=255)
+    code = models.CharField('Код службы', max_length=255)
+    number = models.CharField('Номер телефона', max_length=255)
 
     class Meta:
         verbose_name = 'Экстренная служба'
@@ -23,18 +23,18 @@ class Applicant(models.Model):
     GENDER_CHOICES = (
         (MAN, 'Мужчина'),
         (WOMAN, 'Женщина'), )
-    photo_applicant = models.ImageField("Фото заявителя", blank=True)
-    surname = models.CharField("Фамилия", max_length=255)
-    name = models.CharField("Имя", max_length=100)
-    name_father = models.CharField("Отчество", max_length=255)
-    gender = models.CharField("Пол", max_length=255,
+    photo_applicant = models.ImageField('Фото заявителя', blank=True)
+    surname = models.CharField('Фамилия', max_length=255)
+    name = models.CharField('Имя', max_length=100)
+    name_father = models.CharField('Отчество', max_length=255)
+    gender = models.CharField('Пол', max_length=255,
                               choices=GENDER_CHOICES,
                               default=WOMAN)
-    date = models.DateField("Дата рождения")
-    health_status = models.TextField("Состояние здоровья", blank=True,
+    date = models.DateField('Дата рождения')
+    health_status = models.TextField('Состояние здоровья', blank=True,
                                      default='Практически здоров',
-                                     help_text="Аллергоамамнез, хронические заболевания и т.п.")
-    number = models.CharField("Номер телефона", max_length=255, blank=True)
+                                     help_text='Аллергоамамнез, хронические заболевания и т.п.')
+    number = models.CharField('Номер телефона', max_length=255, blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -56,10 +56,10 @@ class Appeal(models.Model):
     STATUS_CHOICES = (
         (IN_WORK, 'В работе'),
         (FINNISHED, 'Завершено'), )
-    status_appeal = models.CharField("Статус обращения", max_length=255,
+    status_appeal = models.CharField('Статус обращения', max_length=255,
                                      choices=STATUS_CHOICES,
                                      default=IN_WORK)
-    date = models.DateTimeField("Дата обращения", auto_now_add=True)
+    date = models.DateTimeField('Дата обращения', auto_now_add=True)
     number = models.UUIDField('Номер обращения', default=uuid.uuid4,
                               editable=False, db_index=True)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',

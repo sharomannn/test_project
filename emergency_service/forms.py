@@ -13,7 +13,7 @@ class AddService(forms.ModelForm):
 class AddAppeal(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['applicant'].empty_label = "Заявитель не выбрана"
+        self.fields['applicant'].empty_label = 'Заявитель не выбрана'
 
     class Meta:
         model = Appeal
