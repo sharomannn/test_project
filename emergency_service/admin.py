@@ -22,7 +22,7 @@ class Applicant(admin.ModelAdmin):
 @admin.register(models.Appeal)
 class Appeal(admin.ModelAdmin):
     ordering = ('-date',)
-    date_hierarchy = 'date'
+    # date_hierarchy = 'date'
     list_display_links = ('date', 'number')
     list_filter = ('date', 'status_appeal')
     list_display = ('date', 'number', 'applicant')

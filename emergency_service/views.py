@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from emergency_service.models import *
 from emergency_service.forms import *
@@ -62,11 +62,14 @@ def add_service(request):
     if request.method == 'POST':
         form = AddService(request.POST)
         if form.is_valid():
-            form.save()
+            try:
+                form.save()
+            except:
+                form.add_error()
     context = {
         'form': form
     }
-    return render(request, 'add.html', context)
+    return render(request, 'add .html', context)
 
 
 def add_appeal(request):
@@ -74,20 +77,26 @@ def add_appeal(request):
     if request.method == 'POST':
         form = AddAppeal(request.POST)
         if form.is_valid():
-            form.save()
+            try:
+                form.save()
+            except:
+                form.add_error()
     context = {
         'form': form
     }
     return render(request, 'add.html', context)
+
 
 def add_applicant(request):
     form = AddApplicant()
     if request.method == 'POST':
         form = AddApplicant(request.POST)
         if form.is_valid():
-            form.save()
+            try:
+                form.save()
+            except:
+                form.add_error()
     context = {
         'form': form
     }
     return render(request, 'add.html', context)
-

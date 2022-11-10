@@ -26,13 +26,13 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="http://127.0.0.1:8000/service">Данные о службах</a>
+                       href="{% url 'service'%}">Данные о службах</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:8000/applicant">Заявители</a>
+                    <a class="nav-link" href="{% url 'applicant'%}">Заявители</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:8000/appeal">Обращения</a>
+                    <a class="nav-link" href="{% url 'appeal'%}">Обращения</a>
                 </li>
             </ul>
             <span class="navbar-text">

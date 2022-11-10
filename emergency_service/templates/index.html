@@ -3,23 +3,28 @@
 
 <div class="container ">
     <div class="row gy-8">
-        <a href="http://127.0.0.1:8000/service"
+        <a href="{% url 'service'%}"
            class="btn btn-primary col-8 gy-4 mx-auto" role="button"
            data-bs-toggle="button">Просмотреть данные о
             службах спасения</a>
-        <a href="http://127.0.0.1:8000/applicant" class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+        <a href="{% url 'applicant'%}"
+           class="btn btn-primary col-8 gy-4 mx-auto" role="button"
            data-bs-toggle="button">Просмотреть данные о
-                заявителях</a>
-        <a href="http://127.0.0.1:8000/appeal" class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+            заявителях</a>
+        <a href="{% url 'appeal'%}"
+           class="btn btn-primary col-8 gy-4 mx-auto" role="button"
            data-bs-toggle="button">Просмотреть обращения</a>
 
-        <a href="http://127.0.0.1:8000/service/add"
+        <a href="{% url 'add_service'%}"
            class="btn btn-primary col-8 gy-4 mx-auto" role="button"
            data-bs-toggle="button">Добавить новую службу</a>
-        <a href="http://127.0.0.1:8000/applicant/add" class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+        <a href="{% url 'add_applicant'%}"
+           class="btn btn-primary col-8 gy-4 mx-auto" role="button"
            data-bs-toggle="button">Добавить нового заявителя</a>
-        <a href="http://127.0.0.1:8000/appeal/add" class="btn btn-primary col-8 gy-4 mx-auto" role="button"
+        <a href="{% url 'add_appeal'%}"
+           class="btn btn-primary col-8 gy-4 mx-auto" role="button"
            data-bs-toggle="button">Добавить новое обращение</a>
+    </div>
     </div>
 
     {% endblock content %}
