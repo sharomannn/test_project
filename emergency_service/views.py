@@ -1,5 +1,8 @@
+from django.http import HttpResponse, JsonResponse, HttpRequest
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+
+from emergency_service.filters import ApplicantFilter
 from emergency_service.models import *
 from emergency_service.forms import *
 
@@ -57,6 +60,34 @@ class AppealOnePage(DetailView):
 # def index_page(request):
 #     return render(request, 'index.html')
 
+
+
+class ServiceUpdate(UpdateView):
+    model = EmergencyService
+    template_name = 'add.html'
+    fields = ['name', 'number', 'code']
+
+    def form_valid(self, form):
+        return redirect('/service/')
+
+class AppealUpdate(UpdateView):
+    model = Appeal
+    template_name = 'add.html'
+    fields = ['status_appeal', 'service', 'applicant', 'number_cases',
+              'not_call']
+
+    def form_valid(self, form):
+        return redirect('/appeal/')
+
+class ApplicantUpdate(UpdateView):
+    model = Applicant
+    template_name = 'add.html'
+    fields = ['photo_applicant', 'surname', 'name', 'name_father', 'gender',
+              'date', 'health_status', 'number', 'slug']
+
+    def form_valid(self, form):
+        return redirect('/applicant/')
+
 def add_service(request):
     form = AddService()
     if request.method == 'POST':
@@ -69,7 +100,7 @@ def add_service(request):
     context = {
         'form': form
     }
-    return render(request, 'add .html', context)
+    return render(request, 'add.html', context)
 
 
 def add_appeal(request):
@@ -100,3 +131,53 @@ def add_applicant(request):
         'form': form
     }
     return render(request, 'add.html', context)
+
+
+def vievs(request):
+    object_list = []
+    for p in Applicant.objects.all():
+        object_list.append({
+            'id': p.pk,
+            'number': p.number
+        })
+    return JsonResponse({'object_list': object_list})
+
+
+# Отображает номера телефонов с определённым id
+
+def vievs_len(request):
+    qs = Applicant.objects.count()
+    return JsonResponse({'result': qs})
+
+
+def redirectd(request):
+    response = redirect('http://127.0.0.1:8000')
+    return response
+
+
+def vievs_number(request, number):
+    qs = Applicant.objects.get(number=number)
+    detail = {
+        'id': qs.id,
+        'name': qs.number
+    }
+    return JsonResponse({'result': detail})
+
+
+def vievs_id(request, id):
+    qs = Applicant.objects.get(id=id)
+    detail = {
+        'id': qs.id,
+        'Фамилия': qs.surname,
+        'Имя': qs.name,
+        'Отчество': qs.name_father,
+        'Пол': qs.gender,
+        'Дата рождения': qs.date,
+        'Состояние здоровья': qs.health_status,
+        'name': qs.number,
+    }
+    return JsonResponse({'result': detail})
+
+def applicant_list(request):
+    f = ApplicantFilter(request.GET, queryset=Applicant.objects.all())
+    return render(request, 'applicant.html', {'applicant_list': f})
