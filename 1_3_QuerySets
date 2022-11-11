@@ -66,23 +66,117 @@
 <QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (3)>, <Appeal: Appeal object (5)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (2)>]>
 
 
-
+1 заданея
 >>> Appeal.objects.filter(id=3)
 <QuerySet [<Appeal: Appeal object (3)>]>
 
 
+
+3 задание
 >>> Applicant.objects.order_by('id')
 <QuerySet [<Applicant: ddddd fffff ggggg>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>]>
 
+
+4 задание
 >>> Applicant.objects.filter(date__lte='2004-01-01')
 <QuerySet [<Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>]>
 
+5 задание
 >>> Applicant.objects.exclude(date__lte='2004-01-01')
 <QuerySet [<Applicant: ddddd fffff ggggg>]>
 
+
+6 задание
 >>> len(Applicant.objects.all())
 8
->>> 
+>>>
 
 
+7 задание
+>>> Applicant.objects.filter(name__istartswith='Алекс')
+<QuerySet [<Applicant: Ермаков Александр Алегович>, <Applicant: Иванова Александра Альбертовна>]>
 
+
+8. задание
+>>> a = Appeal.objects.filter(service__name__isnull=True)
+>>> a
+<QuerySet [<Appeal: Appeal object (11)>, <Appeal: Appeal object (9)>, <Appeal: Appeal object (8)>, <Appeal: Appeal object (7)>]>
+
+
+9. задание
+>>> a = Appeal.objects.filter(service__code=103)
+>>> a
+<QuerySet [<Appeal: Appeal object (10)>, <Appeal: Appeal object (6)>]>
+
+
+10 задание
+>>> a = Appeal.objects.filter(date__date__gte=datetime.date(2005, 1, 1))
+>>> a
+<QuerySet [<Appeal: Appeal object (11)>, <Appeal: Appeal object (10)>, <Appeal: Appeal object (9)>, <Appeal: Appeal object (8)>, <Appeal: Appeal object (7)>, <Appeal: Appeal object (6)>, <Appeal: Appeal object (12)>]>
+>>> a = Appeal.objects.filter(date__date__gte=datetime.date(2022, 1, 1))
+>>> a
+<QuerySet [<Appeal: Appeal object (11)>, <Appeal: Appeal object (10)>, <Appeal: Appeal object (9)>, <Appeal: Appeal object (8)>, <Appeal: Appeal object (7)>, <Appeal: Appeal object (6)>]>
+
+
+11 задание
+>>> a = Applicant.objects.filter(Q(number='') | Q(photo_applicant='') )
+>>> a
+<QuerySet [<Applicant: Ермаков Александр Алегович>, <Applicant: Иванова Александра Альбертовна>, <Applicant: Ирмаков Иван Иванович>, <Applicant: Шарипов Роман Альбертович>]>
+>>> a = Applicant.objects.filter(Q(number='') & Q(photo_applicant='') )
+>>> a
+<QuerySet [<Applicant: Ирмаков Иван Иванович>]>
+
+12 задание
+>>> a = Applicant.objects.filter(Q(number__istartswith='8987') | Q(number__istartswith='7987') )
+>>> a
+<QuerySet [<Applicant: Ермаков Александр Алегович>, <Applicant: Иванова Александра Альбертовна>, <Applicant: Шарипов Роман Альбертович>]>
+>>> a = Applicant.objects.filter(Q(number__istartswith='8997') | Q(number__istartswith='7997'))
+>>> a
+<QuerySet []>
+
+13 задание объединение
+-
+
+14
+>>> start_date = datetime.date(2021, 1, 1)
+>>> end_date = datetime.date(2022, 3, 31)
+>>> a = Appeal.objects.filter(date__range=(start_date, end_date))
+>>> a
+<QuerySet [<Appeal: Appeal object (12)>]>
+
+
+15
+>>> a = Applicant.objects.filter(number='').count()
+>>> a
+1
+
+
+16
+a = Applicant.objects.all('name').distinct('name')
+не поддерживаютя базой данных
+
+
+18
+>>> a = Applicant.objects.all().values('number')
+>>> a
+<QuerySet [{'number': '89876191111'}, {'number': '89876191111'}, {'number': '89876191155'}, {'number': ''}, {'number': '89876191141'}]>
+
+
+19
+>>> a = Applicant.objects.all().exclude().values('number')
+>>> a
+<QuerySet [{'number': '89876191111'}, {'number': '89876191111'}, {'number': '89876191155'}, {'number': ''}, {'number': '89876191141'}]>
+
+22 задание
+>>> a = Applicant.objects.update_or_create(
+...     number='12341234',
+...     defaults={'number':'11111111111'},
+... )
+>>> a
+(<Applicant: Ершов Дмитрий Олегович>, False)
+
+
+a = Applicant.objects.bulk_create([
+...     Applicant(headline='This is a test'),
+...     Applicant(headline='This is only a test'),
+... ])
