@@ -59,7 +59,7 @@ class Appeal(models.Model):
     status_appeal = models.CharField('Статус обращения', max_length=255,
                                      choices=STATUS_CHOICES,
                                      default=IN_WORK)
-    date = models.DateTimeField('Дата обращения', auto_now_add=True)
+    date = models.DateTimeField('Дата обращения', auto_now_add=False)
     number = models.UUIDField('Номер обращения', default=uuid.uuid4,
                               editable=False, db_index=True)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
@@ -70,6 +70,7 @@ class Appeal(models.Model):
     number_cases = models.IntegerField('Количество пострадавших', default=1)
     not_call = models.BooleanField('Не звонить', default=False)
     slug = models.SlugField(unique=True, blank=True)
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.number)
