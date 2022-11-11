@@ -1,0 +1,88 @@
+>>> from  emergency_service.models import Applicant
+>>> b = Applicant.objects.all()
+>>> b
+<QuerySet [<Applicant: Иванова Ольга Ивановна>, <Applicant: Шарипов Роман Альбертович>]>
+
+
+>>> a = Applicant.objects.filter(id = 2)
+>>> a
+<QuerySet [<Applicant: Иванова Ольга Ивановна>]>
+
+
+>>> c = Applicant.objects.get(id=1)
+>>> c
+<Applicant: Шарипов Роман Альбертович>
+
+
+>>> Applicant.objects.all()[:1]
+<QuerySet [<Applicant: Иванова Ольга Ивановна>]>
+
+
+>>> Appeal.objects.all()[:5]
+<QuerySet [<Appeal: Appeal object (3)>, <Appeal: Appeal object (2)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (5)>, <Appeal: Appeal object (1)>]>
+>>> Appeal.objects.all()[:4]
+<QuerySet [<Appeal: Appeal object (3)>, <Appeal: Appeal object (2)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (5)>]>
+
+
+>>> Appeal.objects.all().reverse()
+<QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (5)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (2)>, <Appeal: Appeal object (3)>]>
+>>> Appeal.objects.all().reverse()[:3]
+<QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (5)>, <Appeal: Appeal object (4)>]>
+>>> Appeal.objects.all().latest()
+
+>>> Appeal.objects.latest('date')
+<Appeal: Appeal object (1)>
+
+>>> Appeal.objects.order_by('date')
+<QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (2)>, <Appeal: Appeal object (3)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (5)>]>
+
+>>> Appeal.objects.order_by('date').reverse
+<bound method QuerySet.reverse of <QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (2)>, <Appeal: Appeal object (3)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (5)>]>>
+
+
+>>> Appeal.objects.all()[::2]
+[<Appeal: Appeal object (3)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (1)>]
+
+>>> print(len(connection.queries))
+12
+
+
+>>> reset_queries()
+>>> print(len(connection.queries)
+... 
+
+
+>>> Appeal.objects.order_by('date').reverse().reverse()
+<QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (2)>, <Appeal: Appeal object (3)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (5)>]>
+
+>>> print(len(Appeal.objects.all()))
+5
+
+>>> Appeal.objects.order_by('?')[:1]
+<QuerySet [<Appeal: Appeal object (1)>]>
+>>> Appeal.objects.order_by('?')
+<QuerySet [<Appeal: Appeal object (4)>, <Appeal: Appeal object (5)>, <Appeal: Appeal object (1)>, <Appeal: Appeal object (3)>, <Appeal: Appeal object (2)>]>
+>>> Appeal.objects.order_by('?')
+<QuerySet [<Appeal: Appeal object (1)>, <Appeal: Appeal object (3)>, <Appeal: Appeal object (5)>, <Appeal: Appeal object (4)>, <Appeal: Appeal object (2)>]>
+
+
+
+>>> Appeal.objects.filter(id=3)
+<QuerySet [<Appeal: Appeal object (3)>]>
+
+
+>>> Applicant.objects.order_by('id')
+<QuerySet [<Applicant: ddddd fffff ggggg>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>]>
+
+>>> Applicant.objects.filter(date__lte='2004-01-01')
+<QuerySet [<Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>, <Applicant: Шарипов Роман Альбертович>]>
+
+>>> Applicant.objects.exclude(date__lte='2004-01-01')
+<QuerySet [<Applicant: ddddd fffff ggggg>]>
+
+>>> len(Applicant.objects.all())
+8
+>>> 
+
+
+
