@@ -24,7 +24,7 @@ urlpatterns = [
     path('applicant/<slug:slug>/', ApplicantOnePage.as_view()),
 
     path('service/', EmergencyServicePage.as_view(), name='service'),
-    path('applicant/', ApplicantPage.as_view(), name='applicant'),
+    path('applicant/', ApplicantPageFilter.as_view(), name='applicant'),
     path('appeal/', AppealPage.as_view(), name='appeal'),
 
     path('', TemplateView.as_view(template_name="index.html"), name='index'),

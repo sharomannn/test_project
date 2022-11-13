@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+ <form method="get" class="form-control col-6 gy-4 mx-auto">
+        {{ filter.form.as_p }}
+        <input type="submit" class="btn btn-primary col-6 gy-4 mx-auto"/>
+ </form>
+
 {% for post in applicant_list %}
 <div class="card gy-5">
         <h5 class="card-header"><a href="{% url 'applicant'%}{{post.slug}}">ФИО заявителя: {{post.surname}} {{post.name}} {{post.name_father}}</a></h5>

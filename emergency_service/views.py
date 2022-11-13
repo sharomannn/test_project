@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, UpdateView
+from django_filters.views import FilterView
 
+from emergency_service.filters import ApplicantFilter
 from emergency_service.forms import *
 
 
@@ -11,10 +13,17 @@ class EmergencyServicePage(ListView):
     context_object_name = 'service_list'
 
 
-class ApplicantPage(ListView):
+# class ApplicantPage(ListView):
+#     model = Applicant
+#     template_name = 'applicant.html'
+#     context_object_name = 'applicant_list'
+
+class ApplicantPageFilter(FilterView):
     model = Applicant
     template_name = 'applicant.html'
     context_object_name = 'applicant_list'
+    filterset_class = ApplicantFilter
+
 
 
 class ApplicantOnePage(DetailView):
