@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<form method="get" class="form-control col-6 gy-4 mx-auto">
+        {{ filter.form.as_p }}
+        <input type="submit" class="btn btn-primary col-6 gy-4 mx-auto"/>
+ </form>
 
 <table class="table table-hover table-bordered">
     <thead>

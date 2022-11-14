@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, UpdateView
 from django_filters.views import FilterView
 
-from emergency_service.filters import ApplicantFilter
+from emergency_service.filters import ApplicantFilter, AppealFilter
 from emergency_service.forms import *
 
 
@@ -37,11 +37,16 @@ class ApplicantOnePage(DetailView):
 #     }
 #     return render(request, "applicant_one.html", context)
 
-
-class AppealPage(ListView):
+class AppealPage(FilterView):
     model = Appeal
     template_name = 'appeal.html'
     context_object_name = 'appeal_list'
+    filterset_class = AppealFilter
+
+# class AppealPage(ListView):
+#     model = Appeal
+#     template_name = 'appeal.html'
+#     context_object_name = 'appeal_list'
 
 
 class AppealOnePage(DetailView):
