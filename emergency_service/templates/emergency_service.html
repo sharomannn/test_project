@@ -6,6 +6,7 @@
         <div class="card-body">
             <p class="card-title">Код: {{post.code}}</p>
             <p class="card-text">Номер: {{post.number}}</p>
+            <p><a href="{% url 'service'%}{{post.pk}}/update"> Редактировать</a></p>
         </div>
     </div>
 

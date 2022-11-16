@@ -14,7 +14,7 @@ STATUS_CHOICES = (
 
 
 class ApplicantFilter(django_filters.FilterSet):
-    date = django_filters.CharFilter(label='Дата рождения',
+    date = django_filters.DateFilter(label='Дата рождения',
                                      lookup_expr='contains')
     number = django_filters.CharFilter(label='Номер телефона',
                                        lookup_expr='contains')

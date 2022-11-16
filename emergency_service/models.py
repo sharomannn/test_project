@@ -22,7 +22,7 @@ class Applicant(models.Model):
     WOMAN = 'Ж'
     GENDER_CHOICES = (
         (MAN, 'Мужчина'),
-        (WOMAN, 'Женщина'), )
+        (WOMAN, 'Женщина'),)
     photo_applicant = models.ImageField('Фото заявителя', blank=True)
     surname = models.CharField('Фамилия', max_length=255)
     name = models.CharField('Имя', max_length=100)
@@ -40,14 +40,10 @@ class Applicant(models.Model):
     def __str__(self):
         return f'{self.surname} {self.name} {self.name_father}'
 
-
-
     class Meta:
         verbose_name = 'Заявитель'
         verbose_name_plural = 'Заявители'
         ordering = ('name',)
-
-
 
 
 class Appeal(models.Model):
@@ -55,7 +51,7 @@ class Appeal(models.Model):
     FINNISHED = 'Завершено'
     STATUS_CHOICES = (
         (IN_WORK, 'В работе'),
-        (FINNISHED, 'Завершено'), )
+        (FINNISHED, 'Завершено'),)
     status_appeal = models.CharField('Статус обращения', max_length=255,
                                      choices=STATUS_CHOICES,
                                      default=IN_WORK)
@@ -63,7 +59,8 @@ class Appeal(models.Model):
     number = models.UUIDField('Номер обращения', default=uuid.uuid4,
                               editable=False, db_index=True)
     service = models.ManyToManyField(EmergencyService, related_name='appeals',
-                                     verbose_name='Экстренная служба', blank=True)
+                                     verbose_name='Экстренная служба',
+                                     blank=True)
     applicant = models.ForeignKey(Applicant, related_name='appeals',
                                   verbose_name='Заявитель',
                                   on_delete=models.CASCADE)
@@ -71,14 +68,11 @@ class Appeal(models.Model):
     not_call = models.BooleanField('Не звонить', default=False)
     slug = models.SlugField(unique=True, blank=True)
 
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.number)
         super(Appeal, self).save(*args, **kwargs)
-
 
     class Meta:
         verbose_name = 'Обращение'
         verbose_name_plural = 'Обращения'
         ordering = ('-date',)
-

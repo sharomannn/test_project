@@ -16,9 +16,9 @@ urlpatterns = [
     path('applicant/add/', emergency_service.views.add_applicant, name='add_applicant'),
     path('service/add/', emergency_service.views.add_service, name='add_service'),
 
-    path('service/<int:pk>/update', ServiceUpdate.as_view()),
-    path('appeal/<slug:slug>/update', AppealUpdate.as_view()),
-    path('applicant/<slug:slug>/update', ApplicantUpdate.as_view()),
+    path('service/<int:pk>/update', ServiceUpdate.as_view(), name='service_update'),
+    path('appeal/<slug:slug>/update', AppealUpdate.as_view(), name='appeal_update'),
+    path('applicant/<slug:slug>/update', ApplicantUpdate.as_view(), name='applicant_update'),
 
     path('appeal/<slug:slug>/', AppealOnePage.as_view()),
     path('applicant/<slug:slug>/', ApplicantOnePage.as_view()),

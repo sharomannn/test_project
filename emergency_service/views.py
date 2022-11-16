@@ -79,7 +79,12 @@ class ServiceUpdate(UpdateView):
     fields = ['name', 'number', 'code']
 
     def form_valid(self, form):
-        return redirect('/service/')
+        try:
+            form.save()
+            return redirect('/service/')
+        except:
+            form.add_error()
+
 
 
 class AppealUpdate(UpdateView):
@@ -89,7 +94,11 @@ class AppealUpdate(UpdateView):
               'not_call']
 
     def form_valid(self, form):
-        return redirect('/appeal/')
+        try:
+            form.save()
+            return redirect('/appeal/')
+        except:
+            form.add_error()
 
 
 class ApplicantUpdate(UpdateView):
@@ -99,8 +108,11 @@ class ApplicantUpdate(UpdateView):
               'date', 'health_status', 'number', 'slug']
 
     def form_valid(self, form):
-        return redirect('/applicant/')
-
+        try:
+            form.save()
+            return redirect('/applicant/')
+        except:
+            form.add_error()
 
 def add_service(request):
     form = AddService()
